@@ -1,5 +1,4 @@
-#!/usr/bin/env/ python3
-
+#!/usr/bin/env python3
 from typing import Tuple
 
 class TrieNode(object):
@@ -41,6 +40,23 @@ def find_prefix(root, prefix: str) -> Tuple[bool, int]:
             return False, 0
     return True, node.counter
 
+def is_word(root, word: str) -> bool:
+	node = root
+	if not root.children:
+		return False
+	for char in word:
+		char_not_found = True
+		for child in node.children:
+			if child.char == char:
+				char_not_found = False
+				node = child
+				break
+		if char_not_found:
+			return False
+	if node.word_finished:
+		return True
+	else:
+		return False
 
 def main():
     root = TrieNode('*')
