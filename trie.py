@@ -58,6 +58,85 @@ def is_word(root, word: str) -> bool:
 	else:
 		return False
 
+def in_order_print(root, suggestions, prefix, word):
+	if(not root):
+		return
+
+	node = root 
+	for child in node.children:
+		start = prefix
+		start += child.char
+		
+		node = child
+		if node.word_finished:
+			if(len(word)-2 <= len(start) <= len(word)+2):
+				suggestions.append(start)
+
+		in_order_print(node, suggestions, start, word)
+
+def reverse_print(root, suggestions, prefix, word):
+	if(not root):
+		return
+
+	
+	reverse = "" #prefix[::-1]
+
+	node = root 
+	for child in node.children:
+
+		start = prefix
+		start += child.char
+
+		reverse_print(child, suggestions, start, word)
+		reverse +=  child.char
+		node = child
+		if node.word_finished:
+			suggestion = reverse + prefix[::-1]
+			if(len(word)-2 <= len(suggestion) <= len(word)+2):
+				suggestions.append(suggestion)
+
+
+def reverse_prefix(root, longestsuffix, prefix,reverse, word):
+	if(not root):
+		return
+	
+	node = root 
+	for child in node.children:
+
+		start = prefix
+		start += child.char
+
+		reverse += child.char
+		node = child
+		reverse_prefix(node, longestsuffix, start,reverse, word)
+		if node.word_finished:
+			for index in range(len(reverse)):
+				suffix = reverse[index:]
+				#if word.endswith(suffix):
+				if suffix in word:
+					if len(suffix) > len(longestsuffix):
+						longestsuffix.append(suffix)
+
+
+def find_prefix_node(root, prefix: str):
+    node = root
+    if not root.children:
+        return None
+    for char in prefix:
+        char_not_found = True
+        for child in node.children:
+            if child.char == char:
+                char_not_found = False
+                node = child
+                break
+        if char_not_found:
+            return None
+
+    return node
+
+
+
+
 def main():
     root = TrieNode('*')
     insert(root, "butterfly")
