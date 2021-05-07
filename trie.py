@@ -60,11 +60,23 @@ def is_word(root, word: str) -> bool:
 
 
 def brute_force1(root, word: str):
+    # Adpoted from https://norvig.com/spell-correct.html
+     
     alphabet = 'abcdefghijklmnopqrstuvwxyz'
+
+    #splitting words in every possible combination
     splits = [(word[:i], word[i:]) for i in range(len(word) + 1)]
+
+    #deleting a letter in each split
     deletes = [L + R[1:] for L,R in splits if R]
+
+    #transposes letters in every split
     transposes = [L + R[1] + R[0] + R[2:] for L,R in splits if len(R)>1]
+
+    #replacing letters in split with every letter in given alphabet
     replaces = [L + c + R[1:] for L,R in splits if R for c in alphabet]
+
+    #inserting every letter from alphabet into each split
     inserts = [L + c + R for L,R in splits for c in alphabet]
 
     fullset = set(deletes + transposes + replaces + inserts)
