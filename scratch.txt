@@ -12,7 +12,7 @@ def find_quick_suggestion(root, prefix: str, word_length):
 				node = child
 				break
 	for child in node.children:
-		continue
+		
 
 
 
