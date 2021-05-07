@@ -31,38 +31,48 @@ for word in words:
 	isWord = trie.is_word(root, word.lower())
 	print(f"{word} {isWord}")
 
+
+final_list = []
 for word in words:
+    brutelist = []
+    if not trie.is_word(root, word.lower()):
+        brutelist = trie.brute_force1(root, word) + list(trie.brute_force2(root, word))
+        brutelist = set(brutelist)
+        for index in range(len(word)):
+            prefix = word[:len(word)-index]
+            isPrefix = trie.find_prefix(root, prefix)
+            if isPrefix[0] and len(prefix) > 2:
+                
+                suggestions = []
+                node = trie.find_prefix_node(root, prefix)
+                trie.in_order_print(node, suggestions, prefix, word)
+                                
+                                #Compare 
+                for brute in brutelist:
+                    if brute in suggestions:
+                        final_list.append(brute)
 
-	if not trie.is_word(root, word.lower()):
-		for index in range(len(word)):
-			prefix = word[:len(word)-index]
-			isPrefix = trie.find_prefix(root, prefix)
-			if isPrefix[0] and len(prefix) > 2:
-
-				print(word)
-				print()
-				print(prefix)
-
-				suggestions = []
-				node = trie.find_prefix_node(root, prefix)
-				trie.in_order_print(node, suggestions, prefix, word)
-
-				print(suggestions)
-				print()
+				#print(suggestions)
+				#print()
 
 				#reverse = []
 				#trie.reverse_print(node,reverse, prefix, word)
 				#print(reverse)
 				#print()
 
-				temp = ""
-				suffix = []
-				trie.reverse_prefix(node,suffix, prefix,temp, word)
-				print(suffix)
-				print()
-
-	
+		#temp = ""
+		#suffix = []
+		#trie.reverse_prefix(node,suffix, prefix,temp, word)
+				#print(suffix)
+				#print()
+                                
+        #print(word)
+				#print()
+				#print(prefix)
+         
+print(final_list)        	
 # TODO run through sentences
 
 # TODO grammar check algorithm
 
+# vim: set sts=4 sw=4 ts=8 expandtab ft=python:
