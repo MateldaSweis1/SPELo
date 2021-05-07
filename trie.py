@@ -59,18 +59,25 @@ def is_word(root, word: str) -> bool:
 		return False
 
 
-def brute_force1(word: str):
+def brute_force1(root, word: str):
     alphabet = 'abcdefghijklmnopqrstuvwxyz'
     splits = [(word[:i], word[i:]) for i in range(len(word) + 1)]
     deletes = [L + R[1:] for L,R in splits if R]
     transposes = [L + R[1] + R[0] + R[2:] for L,R in splits if len(R)>1]
     replaces = [L + c + R[1:] for L,R in splits if R for c in alphabet]
     inserts = [L + c + R for L,R in splits for c in alphabet]
-    return set(deletes + transposes + replaces + inserts)
 
-def brute_force2(word: str):
+    fullset = set(deletes + transposes + replaces + inserts)
+    node = root
+    returnlist = []
+    for word in fullset:
+        if is_word(node, word):
+            returnlist.append(word)
+    return returnlist
+
+def brute_force2(root, word: str):
     alphabet = 'abcdefghijklmnopqrstuvwxyz'
-    return (edits for i in brute_force1(word) for edits in brute_force1(i))
+    return set(edits for i in brute_force1(root, word) for edits in brute_force1(root, i))
 
 def in_order_print(root, suggestions, prefix, word):
 	if(not root):
