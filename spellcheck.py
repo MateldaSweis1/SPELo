@@ -20,7 +20,6 @@ with open("commonWords2.txt", "r") as bfile:
     for index, word in enumerate(bfile): 
         commonWords[word.strip()] = index
 
-print(commonWords)
 
 
 # TODO recieve user input
@@ -51,7 +50,6 @@ with open("userin.txt","r") as afile:
 print(words)	
 # TODO spell check algorithms
 
-
 for i in range(len(words)-1):
     if words[i] == '.' or word == '!' or word == '?':
             words[i+1] = words[i+1].capitalize()
@@ -67,7 +65,7 @@ for i,word in enumerate(words):
     brutelist = []
 for word in words:
     if not trie.is_word(root, word.lower()) and word not in goodPunc:
-        brutelist = trie.brute_force1(root, word) + list(trie.brute_force2(root, word))
+        brutelist = trie.brute_force1(root, word)
         brutelist = set(brutelist)
 
         found = False
@@ -80,23 +78,11 @@ for word in words:
                 node = trie.find_prefix_node(root, prefix)
                 trie.in_order_print(node, suggestions, prefix, word)
                 
-                #Compare
-                '''
-                bestOption=""
-                closeness = 5
-                for brute in brutelist:
-                    if brute in suggestions:
-                        final_list.append(brute) 
-                        found = True
-                        if closeness >= abs(len(word) - len(brute)): 
-                            bestOption = brute
-                            closeness = abs(len(word) - len(brute))
-
-                '''
+                # Compare with Common Words
                 bestOption=""
                 lowestRank = 10000 
                 for brute in brutelist:
-                    if brute in suggestions:
+                    if brute in commonWords:
                         final_list.append(brute) 
                         if brute in commonWords: 
                             found = True
@@ -128,7 +114,6 @@ for word in words:
                     break
                     
                 if not found and len(prefix) == 3:
-                    print(word)
                     suffix = []
                     temp = ""
                     trie.reverse_prefix(node,suffix, prefix,temp, word)
@@ -138,34 +123,16 @@ for word in words:
                         if len(suff) > len(maxSuffix):
                             maxSuffix = suff
 
-                    print(maxSuffix)
-
                     for sugg in suggestions:
                         if maxSuffix in sugg: 
                             words[i] = sugg
 
 
-				#print(suggestions)
-				#print()
 
-				#reverse = []
-				#trie.reverse_print(node,reverse, prefix, word)
-				#print(reverse)
-				#print()
-
-		#temp = ""
-		#suffix = []
-		#trie.reverse_prefix(node,suffix, prefix,temp, word)
-				#print(suffix)
-				#print()
-                                
-        #print(word)
-				#print()
-				#print(prefix)
          
 print(final_list)   
 for word in words:
-    print(f'{word} ')     
+    print(f'{word} ', end='')     
   	
 
 # TODO run through sentences
