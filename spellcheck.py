@@ -1,16 +1,19 @@
 #!/usr/bin/env python3
 
 import trie
+import re
 
 # initialize trie
 root = trie.TrieNode('*')
 
 # loop through lines(words) in a file and store in trie
-with open("studentMachineDict.txt","r") as afile:
-	for line in afile:
-		word=line.rstrip()
-		# add word to trie
-		trie.insert(root, word)
+
+with open("testdict.txt", "r") as afile:
+#with open("studentMachineDict.txt","r") as afile:
+    for line in afile:
+        word=line.strip()
+	# add word to trie
+        trie.insert(root, word)
 		
 commonWords = {}
 with open("commonWords2.txt", "r") as bfile:
@@ -19,27 +22,51 @@ with open("commonWords2.txt", "r") as bfile:
 
 print(commonWords)
 
+
 # TODO recieve user input
 
-# save words as a list without punctuation
-punc = '''!()-[]{};:'"\,`<>./?@#$%^&*_~'''
+# remove wacky punctuation from text and
+# save words as a list with standard punctuation stored as separate items in the list
+wackyPunc = '[]{}()`<>\@#^_~' #"wacky" punctuation
+goodPunc = '\'!-;:"|,\.?$%&*+=/'
+words = []
+
 with open("userin.txt","r") as afile:
-	for text in afile:
-		for let in text:
-			if let in punc:
-				text = text.replace(let,"")
-		words=text.split()
+    for text in afile:  # text refers to each line in the file
+        for let in text:
+            if let in wackyPunc:
+                text = text.replace(let, "")
+        text = text.split()
+        index = 0
+        for word in text:
+            for letter in word:
+                if letter in goodPunc:
+                    word = word.translate({ord(letter): None})
+            if word  == "" : #accounts for case where wacky symbol is orignially surrounded by spaces before it gets replaced with ""
+                continue 
+            words.append(word)
+            if letter in goodPunc:
+                words.append(letter)
 
-	
+print(words)	
 # TODO spell check algorithms
-for word in words:
-	isWord = trie.is_word(root, word.lower())
-	print(f"{word} {isWord}")
 
+
+for i in range(len(words)-1):
+    if words[i] == '.' or word == '!' or word == '?':
+            words[i+1] = words[i+1].capitalize()
+for word in words:
+        if word in goodPunc:
+            print(f"{word} Punctuation")
+        else:
+            isWord = trie.is_word(root, word.lower())
+            print(f"{word} {isWord}")
+            
 final_list = []
 for i,word in enumerate(words):
     brutelist = []
-    if not trie.is_word(root, word.lower()):
+for word in words:
+    if not trie.is_word(root, word.lower()) and word not in goodPunc:
         brutelist = trie.brute_force1(root, word) + list(trie.brute_force2(root, word))
         brutelist = set(brutelist)
 
@@ -118,9 +145,6 @@ for i,word in enumerate(words):
                             words[i] = sugg
 
 
-                    
-                 
-
 				#print(suggestions)
 				#print()
 
@@ -143,8 +167,9 @@ print(final_list)
 for word in words:
     print(f'{word} ')     
   	
+
 # TODO run through sentences
 
-# TODO grammar check algorithm
 
 # vim: set sts=4 sw=4 ts=8 expandtab ft=python:
+
