@@ -95,7 +95,7 @@ def main(string):
 
                     if bestOption:
                         words[i] = bestOption 
-
+                       
                     if found:
                         break
                         
@@ -116,11 +116,16 @@ def main(string):
     #Capitalization of words after ending punctuation
     for j in range(len(words)-1):
         if words[j] == '.' or words[j] == '!' or words[j] == '?':
-            words[j+1] = words[j+1].capitalize()           
-    
+            words[j+1] = words[j+1].capitalize()
+        
+        if words[j] == 'i':
+            words[j] = words[j].capitalize()        
+   
+    print(words) 
     return words
 
 if __name__ == "__main__":
-    main("test1.txt")
+    test = "My toy broke into pieces. we tried putting it togethir, but it was [too] dificult. I am sad. now i will only remeber what it was like to be {happy}. "
+    main(test)
 
 # vim: set sts=4 sw=4 ts=8 expandtab ft=python:
