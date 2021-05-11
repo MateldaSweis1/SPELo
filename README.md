@@ -12,7 +12,9 @@ This project centers around building a text processing software targeted towards
 
 Time spent: **32** hours spent in total
 
-# SPELLo - Part UI
+# SPELo - Part UI
+
+The code in this repository uses the WSGI web application framework called Flask. Details on how to setup Flask in a project folder can be found [here](https://flask.palletsprojects.com/en/1.1.x/installation/). In order to see the working site, setup up Flask in the respective folder in Bash and then run the command **python "server.py"**. This will allow you to access the site by typing a url that will look something like **"http://127.0.0.1:5000"**.
 
 Time spent: **32** hours spent in total
 
@@ -29,4 +31,4 @@ The following **functionality** is completed:
 
 Here's a walkthrough of implemented user stories:
 
-<img src='gif...' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+
