@@ -5,7 +5,7 @@ import trie
 # initialize trie
 root = trie.TrieNode('*')
 
-def main():
+def main(string):
 
 # loop through lines(words) in a file and store in trie
     with open("studentMachineDict.txt","r") as afile:
@@ -27,7 +27,7 @@ def main():
     goodpunc = '\'!-;:"|,\.?$%&*+=/'
     words = []
 
-    with open("test1.txt","r") as afile:
+    with open(string,"r") as afile:
         for text in afile:
             for let in text:
                 if let in wackypunc:
@@ -121,6 +121,6 @@ def main():
     return words
 
 if __name__ == "__main__":
-    main()
+    main("test1.txt")
 
 # vim: set sts=4 sw=4 ts=8 expandtab ft=python:
