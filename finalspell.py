@@ -113,9 +113,11 @@ def main(string):
                             if maxSuffix in sugg: 
                                 words[i] = sugg
 
-               
-    #for word in words:
-        #print(f'{word} ', end='')     
+    #Capitalization of words after ending punctuation
+    for j in range(len(words)-1):
+        if words[j] == '.' or words[j] == '!' or words[j] == '?':
+            words[j+1] = words[j+1].capitalize()           
+    
     return words
 
 if __name__ == "__main__":
