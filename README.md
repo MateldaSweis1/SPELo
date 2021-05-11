@@ -31,4 +31,4 @@ The following **functionality** is completed:
 
 Here's a walkthrough of implemented user stories:
 
-
+![SPELO_demo](https://media.giphy.com/media/alFvyiNCfOpbg1uLEl/giphy.gif)
