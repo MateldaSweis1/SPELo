@@ -28,7 +28,7 @@ def main(string):
     words = []
     
     #with open(string,"r") as afile:
-    for text in string:
+    for text in string.split():
         for let in text:
             if let in wackypunc:
                 text = text.replace(let,"")
@@ -113,9 +113,11 @@ def main(string):
                             if maxSuffix in sugg: 
                                 words[i] = sugg
 
-               
-    #for word in words:
-        #print(f'{word} ', end='')     
+    #Capitalization of words after ending punctuation
+    for j in range(len(words)-1):
+        if words[j] == '.' or words[j] == '!' or words[j] == '?':
+            words[j+1] = words[j+1].capitalize()           
+    
     return words
 
 if __name__ == "__main__":
