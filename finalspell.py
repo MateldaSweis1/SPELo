@@ -22,14 +22,44 @@ with open("commonWords2.txt", "r") as bfile:
 # TODO recieve user input
 
 # save words as a list without punctuation
-punc = '''!()-[]{};:'"\,`<>./?@#$%^&*_~'''
-with open("userin.txt","r") as afile:
-	for text in afile:
-		for let in text:
-			if let in punc:
-				text = text.replace(let,"")
-		words=text.split()
+#punc = '''!()-[]{};:'"\,`<>./?@#$%^&*_~'''
+wackypunc = '[]{}()`<>\@#^_~'
+goodpunc = '\'!-;:"|,\.?$%&*+=/'
+words = []
 
+with open("test1.txt","r") as afile:
+    for text in afile:
+        for let in text:
+            if let in wackypunc:
+                text = text.replace(let,"")
+        text = text.split()
+        for word in text:
+            for letter in word:
+                if letter in goodpunc:
+                    word = word.translate({ord(letter): None})
+                if word == "":
+                    continue
+            
+                addPunc = []
+                if letter in goodpunc:
+                    addPunc.append(letter)
+            words.append(word)
+            for punc in addPunc:
+                words.append(punc)
+'''
+            words = text.split()
+            for phrase in words:
+                for letter in phrase:
+                    if letter in goodpunc:
+                        phrase = phrase.translate({ord(letter): None})
+                if phrase == "":
+                    continue
+                grammarlist.append(phrase)
+                if letter in goodpunc:
+                    grammarlist.append(letter)
+
+print(grammarlist)
+'''
 	
 # TODO spell check algorithms
 for word in words:
