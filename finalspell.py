@@ -26,28 +26,27 @@ def main(string):
     wackypunc = '[]{}()`<>\@#^_~'
     goodpunc = '\'!-;:"|,\.?$%&*+=/'
     words = []
-
-    with open(string,"r") as afile:
-        for text in afile:
-            for let in text:
-                if let in wackypunc:
-                    text = text.replace(let,"")
-            text = text.split()
-            for word in text:
-                for letter in word:
-                    if letter in goodpunc:
-                        word = word.translate({ord(letter): None})
-                    if word == "":
-                        continue
-                
-                    addPunc = []
-                    if letter in goodpunc:
-                        addPunc.append(letter)
-                words.append(word)
-                for punc in addPunc:
-                    words.append(punc)
-
+    
+    #with open(string,"r") as afile:
+    for text in string:
+        for let in text:
+            if let in wackypunc:
+                text = text.replace(let,"")
+        text = text.split()
+        for word in text:
+            for letter in word:
+                if letter in goodpunc:
+                    word = word.translate({ord(letter): None})
+                if word == "":
+                    continue
             
+                addPunc = []
+                if letter in goodpunc:
+                    addPunc.append(letter)
+            words.append(word)
+            for punc in addPunc:
+                words.append(punc)
+                            
 # TODO spell check algorithms
     final_list = []
     for i,word in enumerate(words):
@@ -116,8 +115,7 @@ def main(string):
 
                
     #for word in words:
-    #    print(f'{word} ', end='')     
-    
+        #print(f'{word} ', end='')     
     return words
 
 if __name__ == "__main__":
