@@ -28,7 +28,7 @@ def main(string):
     words = []
     
     #with open(string,"r") as afile:
-    for text in string:
+    for text in string.split():
         for let in text:
             if let in wackypunc:
                 text = text.replace(let,"")
