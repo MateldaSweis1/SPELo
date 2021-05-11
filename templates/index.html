@@ -10,30 +10,37 @@
                 }
                 h1{
                         padding-left:5%;
-            padding-top:1%;
-            font-size: 45px;
+            			padding-top:1%;
+            			font-size: 45px;
                 }
                 p.expla {
                         text-align: center;
+						font-size: 29;
+
                 }
                 p.instr {
                         text-align:center;
                         padding-top:3%;
                 }
                 p.tarea {
-                        margin-left:35%;
+                        margin-left:40%;
                         margin-right:50%;
                 }
                 textarea.ta {
                         text-align:center;
                 }
                 p.transtext {
-                        width:40%;
-                        margin-left:35%;
-
-                        border-color:#336699;
-                        border-style:solid;
+                        text-align:center;
+			vertical-align: middle;
+		        display: table-cell;
                 }
+		div {
+			margin:auto;
+			width:60%;
+			height:150px;
+			display:table;
+			background: white;
+		}
 
     </style>
 </head>
@@ -45,16 +52,16 @@
                 <p class="tarea">
                         <label for="ogtxt">Enter text here:</label><br>
                         <textarea class="ta" id="ogtxt" name="ogtext" rows="15" cols="50"></textarea>
-                        <input type="submit" value="submit"/>
+                        <input type="submit" value="submit" style="margin-left:150px"/>
                 </p>
         </form>
         <br><br>
         {% if text!=''%}
-                <p class='transbox'>
-
-                        <p class='transtext'> {{ text }} </p>
-
-                </p>
+		<p class="expla">Below is your translated text:</p>
+		<div>
+		        <p class='transtext'> {{ text }} </p>
+		</div>
+                
         {% endif %}
 
 
