@@ -23,7 +23,7 @@ The following **functionality** is completed:
 - [x] User can enter text into UI website.
 - [x] Program runs immediately when all text is entered.
 - [x] Text is returned in a subsequent box. 
-- [ ] Text is turned into txt file for user to manipulate. 
+- [x] Text is turned into txt file for user to manipulate. 
 
 ## Video Walkthrough
 
